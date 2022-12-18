@@ -12,13 +12,13 @@ const Slider = {
   STEP: 1,
 };
 
-const form = document.querySelector('.img-upload__form');
-const effectsList = form.querySelector('.effects__list');
-const preview = form.querySelector('.img-upload__preview');
+const uploadForm = document.querySelector('.img-upload__form');
+const effectsList = uploadForm.querySelector('.effects__list');
+const preview = uploadForm.querySelector('.img-upload__preview');
 const image = preview.querySelector('img');
-const effectLevel = form.querySelector('.img-upload__effect-level');
-const effectLevelValue = form.querySelector('.effect-level__value');
-const slider = form.querySelector('.effect-level__slider');
+const effectLevel = uploadForm.querySelector('.img-upload__effect-level');
+const effectLevelValue = uploadForm.querySelector('.effect-level__value');
+const slider = uploadForm.querySelector('.effect-level__slider');
 const defaultImageClass = image.classList[0];
 
 let currentEffect = '';
@@ -70,9 +70,8 @@ const effects = {
 
 const setDefaultEffect = () => {
   effectLevel.classList.add('visually-hidden');
-  form.querySelector('#effect-none').checked = true;
+  uploadForm.querySelector('#effect-none').checked = true;
   image.className = defaultImageClass;
-  image.style.filter = effects.none;
 };
 
 const setEffect = (effect) => {

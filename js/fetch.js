@@ -12,8 +12,12 @@ const sendNewRequest = (onSuccess, onFail, method, body) => {
     },
   )
     .then((response) => response.json())
-    .then((data) => { onSuccess(data); })
-    .catch(() => { onFail(); });
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch(() => {
+      onFail();
+    });
 };
 
 export {sendNewRequest};

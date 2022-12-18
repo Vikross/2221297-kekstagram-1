@@ -6,6 +6,7 @@ import './validator.js';
 import './sc.js';
 import './effects.js';
 import './filters.js';
+import './download.js';
 
 let photos = [];
 
@@ -28,6 +29,7 @@ const onFail = () => {
   messageAlert.textContent = 'Ошибка загрузки данных';
   document.body.append(messageAlert);
 };
+
 const getAllData = () => photos;
 
 sendNewRequest(onSuccess, onFail, 'GET');

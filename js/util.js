@@ -1,6 +1,6 @@
-const isEscape = (evt) => evt.key === 'Escape';
-
 const DELAY = 500;
+
+const isEscape = (evt) => evt.key === 'Escape';
 
 function getRandomNumber (a, b) {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));

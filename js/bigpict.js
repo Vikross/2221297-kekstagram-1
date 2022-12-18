@@ -1,5 +1,6 @@
-import { createComment } from './comments.js';
 import { isEscape } from './util.js';
+
+const COMMENT_STEP = 5;
 
 const bigPicture = document.querySelector('.big-picture');
 const commentCounter = document.querySelector('.social__comment-count');
@@ -7,10 +8,19 @@ const commentLoader = document.querySelector('.comments-loader');
 const closingButton = bigPicture.querySelector('.big-picture__cancel');
 const commentTemplate = bigPicture.querySelector('.social__comment');
 const comments = bigPicture.querySelector('.social__comments');
-const STEP_COMMENT = 5;
 
-let currentIndex = STEP_COMMENT;
+let currentIndex = COMMENT_STEP;
 let currentComments = [];
+
+const createComment = (comment, template) => {
+  const newComment = template.cloneNode(true);
+  const avatar = newComment.querySelector('.social__picture');
+  avatar.src = comment.avatar;
+  avatar.alt = comment.name;
+  newComment.querySelector('.social__text').textContent = comment.message;
+
+  return newComment;
+};
 
 const addComments = () => {
   comments.innerHTML = '';
@@ -19,7 +29,7 @@ const addComments = () => {
 
   const commentsSelected = currentComments.slice(0, currentIndex);
 
-  if(currentComments.length <= STEP_COMMENT || currentIndex >= currentComments.length)
+  if(currentComments.length <= COMMENT_STEP || currentIndex >= currentComments.length)
   {
     commentLoader.classList.add('hidden');
   }
@@ -35,7 +45,7 @@ const addComments = () => {
 };
 
 const onCommentLoaderClick = () => {
-  currentIndex += STEP_COMMENT;
+  currentIndex += COMMENT_STEP;
   addComments();
 };
 
@@ -43,7 +53,7 @@ const closePicture = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   currentComments = [];
-  currentIndex = STEP_COMMENT;
+  currentIndex = COMMENT_STEP;
   commentLoader.removeEventListener('click', onCommentLoaderClick);
 };
 
