@@ -1,25 +1,29 @@
-import { onFormInput, resetForm } from './validator.js';
+import { onFormInput as onFormSubmit, resetForm} from './validator.js';
 import { isEscape } from './util.js';
-import { setDefaultEffect } from './effects.js';
 import { setDefaultScale } from './sc.js';
+import { setDefaultEffect } from './effects.js';
 
 const form = document.querySelector('.img-upload__form');
-const imageOverlay = document.querySelector('.img-upload__overlay');
-const uploadFileButton = document.querySelector('#upload-file');
-const cancelButton = document.querySelector('#upload-cancel');
-const hashtags = document.querySelector('.text__hashtags');
-const comment = document.querySelector('.text__description');
+const imageOverlay = form.querySelector('.img-upload__overlay');
+const uploadingField = form.querySelector('#upload-file');
+const cancelButton = form.querySelector('#upload-cancel');
 
-const onCloseClick = () => {
+const closeForm = () => {
   imageOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  uploadFileButton.value = '';
-  hashtags.value = '';
-  comment.value = '';
+  uploadingField.value = '';
+  form.querySelector('.text__hashtags').value = '';
+  form.querySelector('.text__description').value = '';
   resetForm();
-  form.removeEventListener('submit', onFormInput);
+  form.removeEventListener('submit', onFormSubmit);
+};
+
+const onCloseClick = () => {
+  closeForm();
   cancelButton.removeEventListener('click', onCloseClick);
 };
+
+const onClosingButtonClick = () => onCloseClick();
 
 const isNotTarget = (evt) => !evt.target.classList.contains('text__hashtags')
 && !evt.target.classList.contains('text__description');
@@ -31,14 +35,17 @@ const onDocumentEscKeyDown = (evt) => {
   }
 };
 
-const onFileInput = () => {
+const onUploadingFieldInput = () => {
   imageOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  cancelButton.addEventListener('click', onCloseClick);
+  cancelButton.addEventListener('click', onClosingButtonClick);
   document.addEventListener('keydown', onDocumentEscKeyDown);
-  form.addEventListener('submit', onFormInput);
+  form.addEventListener('submit', onFormSubmit);
+
   setDefaultScale();
   setDefaultEffect();
 };
 
-uploadFileButton.addEventListener('input', onFileInput);
+uploadingField.addEventListener('input', onUploadingFieldInput);
+
+export {closeForm, onDocumentEscKeyDown};

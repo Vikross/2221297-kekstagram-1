@@ -7,8 +7,9 @@ const commentLoader = document.querySelector('.comments-loader');
 const closingButton = bigPicture.querySelector('.big-picture__cancel');
 const commentTemplate = bigPicture.querySelector('.social__comment');
 const comments = bigPicture.querySelector('.social__comments');
-const COMMENTS_STEP = 5;
-let currentIndex = COMMENTS_STEP;
+const STEP_COMMENT = 5;
+
+let currentIndex = STEP_COMMENT;
 let currentComments = [];
 
 const addComments = () => {
@@ -18,7 +19,7 @@ const addComments = () => {
 
   const commentsSelected = currentComments.slice(0, currentIndex);
 
-  if(currentComments.length <= COMMENTS_STEP || currentIndex >= currentComments.length)
+  if(currentComments.length <= STEP_COMMENT || currentIndex >= currentComments.length)
   {
     commentLoader.classList.add('hidden');
   }
@@ -34,7 +35,7 @@ const addComments = () => {
 };
 
 const onCommentLoaderClick = () => {
-  currentIndex += COMMENTS_STEP;
+  currentIndex += STEP_COMMENT;
   addComments();
 };
 
@@ -43,7 +44,7 @@ const closePicture = () => {
   document.body.classList.remove('modal-open');
 
   currentComments = [];
-  currentIndex = COMMENTS_STEP;
+  currentIndex = STEP_COMMENT;
   commentLoader.removeEventListener('click', onCommentLoaderClick);
 };
 
