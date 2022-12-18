@@ -26,4 +26,6 @@ const renderPhotos = (photos) => {
   document.querySelector('.pictures').appendChild(fragment);
 };
 
-export {renderPhotos};
+const clearPhotos = () => document.querySelectorAll('.picture').forEach((picture) => picture.remove());
+
+export {renderPhotos, clearPhotos};

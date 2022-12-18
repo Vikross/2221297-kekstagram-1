@@ -1,16 +1,18 @@
+import {renderPhotos} from'./pictures.js';
+import {sendNewRequest} from './fetch.js';
 import './bigpict.js';
 import './newform.js';
 import './validator.js';
 import './sc.js';
 import './effects.js';
-import {renderPhotos} from'./pictures.js';
-import {sendNewRequest} from './fetch.js';
+import './filters.js';
 
 let photos = [];
 
 const onSuccess = (data) => {
   photos = data.slice();
   renderPhotos(photos);
+  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
 };
 
 const onFail = () => {
@@ -26,5 +28,8 @@ const onFail = () => {
   messageAlert.textContent = 'Ошибка загрузки данных';
   document.body.append(messageAlert);
 };
+const getAllData = () => photos;
 
 sendNewRequest(onSuccess, onFail, 'GET');
+
+export {getAllData};

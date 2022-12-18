@@ -42,7 +42,6 @@ const onCommentLoaderClick = () => {
 const closePicture = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
-
   currentComments = [];
   currentIndex = STEP_COMMENT;
   commentLoader.removeEventListener('click', onCommentLoaderClick);
