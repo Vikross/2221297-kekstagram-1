@@ -1,3 +1,5 @@
-import {getPhotosData} from './data.js';
+import { getPhotosData } from './data.js';
+import{ createPhotos } from './miniatures.js';
 
-getPhotosData();
+const arr = getPhotosData();
+createPhotos(arr);
