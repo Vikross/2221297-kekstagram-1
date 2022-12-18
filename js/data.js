@@ -1,5 +1,5 @@
 import {getRandomElement} from './util.js';
-import {getRandomNumber} from './random-number.js';
+import {getRandomNumber} from './randnum.js';
 
 const MESSAGES = [
   'Всё отлично!',
@@ -49,7 +49,7 @@ const addPhotos = () => {
       url: `photos/${i + 1}.jpg`,
       description: getRandomElement(DESCRIPTIONS),
       likes: getRandomNumber(15,200),
-      comments: addComments(getRandomNumber(1,3))
+      comments: addComments(getRandomNumber(1,20))
     });
   }
 };

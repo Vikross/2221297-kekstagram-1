@@ -1,5 +1,5 @@
 import { photosArray } from './data.js';
-import {addOnPictureClick} from './bigpict.js';
+import { openBigPicture } from './bigpict.js';
 
 const picturesBlock = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -10,7 +10,13 @@ const renderPhoto = (photo) => {
   element.querySelector('.picture__img').src = photo.url;
   element.querySelector('.picture__likes').textContent = photo.likes;
   element.querySelector('.picture__comments').textContent = photo.comments.length;
-  addOnPictureClick(element, photo);
+
+  element.addEventListener('click', (evt) => {
+    evt.preventDefault();
+
+    openBigPicture(photo);
+  });
+
   return element;
 };
 
@@ -18,6 +24,7 @@ const renderPhotos = () => {
   photosArray.forEach((photo) => {
     fragment.appendChild(renderPhoto(photo));
   });
+
   picturesBlock.appendChild(fragment);
 };
 
