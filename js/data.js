@@ -1,4 +1,5 @@
-import { getRandomArrayElement } from './util.js';
+import {getRandomElement} from './util.js';
+import {getRandomNumber} from './random-number.js';
 
 const MESSAGES = [
   'Всё отлично!',
@@ -25,29 +26,33 @@ const NAMES = [
   'Андрей',
 ];
 
-let countLikes = {
-    MIN: 15,
-    MAX: 200
+const PHOTOS_COUNT = 25;
+const photosArray = [];
+
+const addComments = (count) => {
+  const commentsArray = [];
+  for(let i = 0; i < count; i++){
+    commentsArray.push({
+      id: i,
+      avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+      message: getRandomElement(MESSAGES),
+      name: getRandomElement(NAMES)
+    });
+  }
+  return commentsArray;
 };
 
-MAX_PHOTOS = 25;
-MAX_COMMENTS = 6;
+const addPhotos = () => {
+  for (let i = 0; i < PHOTOS_COUNT; i++){
+    photosArray.push({
+      id: i + 1,
+      url: `photos/${i + 1}.jpg`,
+      description: getRandomElement(DESCRIPTIONS),
+      likes: getRandomNumber(15,200),
+      comments: addComments(getRandomNumber(1,3))
+    });
+  }
+};
 
-const createComments = (id) => ({
-  id,
-  avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
-  message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
-  name: NAMES[getRandomPositiveInteger(0, NAMES.length - 1)]
-});
-
-const createPhotosData = (id) => ({
-  id,
-  url: `photos/${id}.jpg`,
-  description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomPositiveInteger(countLikes.MIN, countLikes.MAX),
-  comments: Array.from({length: getRandomPositiveInteger(1, MAX_COMMENTS)}).map((element, index) => createComments(index + 1)),
-});
-
-const getPhotosData = () => Array.from({length: MAX_PHOTOS}).map((element, index) => createPhotosData(index + 1));
-
-export {getPhotosData};
+addPhotos();
+export {photosArray};
