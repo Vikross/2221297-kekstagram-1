@@ -1,9 +1,9 @@
 import {renderPhotos} from'./pictures.js';
 import {sendNewRequest} from './fetch.js';
-import './bigpict.js';
+import './big-picture.js';
 import './newform.js';
 import './validator.js';
-import './sc.js';
+import './scale.js';
 import './effects.js';
 import './filters.js';
 import './download.js';
